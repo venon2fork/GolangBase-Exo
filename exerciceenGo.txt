@@ -1,0 +1,466 @@
+	// selectionner et enlever les espace
+	phrase := "\t hello world "
+	fmt.Printf("%d pour la phrase %s \n", len(phrase), phrase)
+
+	b := strings.TrimSpace(phrase)
+	fmt.Printf("%d pour la phrase %s \n", len(b), phrase)
+
+    exo 2:
+    	// extrait une partie du texte
+	phrase := "hello, hello world , thank you"
+	b := phrase[0:10]
+	fmt.Printf("extraire : %s \n", b) //extraire : hello, hel
+
+    exo3 :
+    	// extrait une partie du texte
+	phrase := "hello, hello world , thank you"
+	// b := strings.Replace(phrase, "hello", "goodMorning", 1) // 1 pour une seul fois
+	// fmt.Printf("ancienne phrase: %s \nnouvelle phrase avec replace : %s \n", phrase, b)
+	// ancienne phrase: hello, hello world , thank you
+	// nouvelle phrase avec replace : goodMorning, hello world , thank you
+
+    extraire tous et compter le nombre d'occurrence:
+    fmt.Println(strings.Contains("seafood", "foo"))
+	c := strings.Count(phrase, "hello")                      //
+	b := strings.Replace(phrase, "hello", "goodMorning", -1) // -1 pour tous
+	fmt.Printf("nombre d'occurrence de hello %d \n", c)      // 2
+	fmt.Printf("ancienne phrase: %s \nnouvelle phrase avec replace : %s \n", phrase, b)
+
+    exo4:
+
+    to upper 
+    to lower
+    to capitalize all and one to substrings
+
+    exo 5:
+    d := true
+	v := strconv.FormatBool(!d)
+	fmt.Println(v) //false
+
+	// e := 2345
+	// f := strconv.FormatInt(e, 10)
+	// fmt.Println(f) //false
+
+	u := "2"
+	g, err := strconv.Atoi(u)
+	if err != nil {
+		fmt.Print("Error sur data\n")
+	} else {
+		if g == 2 {
+			fmt.Print("data is ok\n")
+		}
+	}
+
+
+    exo 6:
+    Convertir une string en byte puis l'inverse
+    c := "Hello"
+	b := []byte(c)
+	fmt.Println(b) //[72 101 108 108 111]
+
+	fmt.Println(string(b)) //Hello
+
+
+exo 7: 
+current := time.Now()
+	fmt.Println(current.String())
+	fmt.Println(current)
+
+	fmt.Println(" MM-DD-YYYY", current.Format("01-02-19")) //MM-DD-YYYY 08-27-89 ????
+	y := current.Year()
+	d := current.Day()
+	m := current.Month()
+	fmt.Printf("%d/%d/%d \n", d, m, y) //2019
+    	current := time.Now()
+	aprilDate := current.AddDate(1,1,0)
+
+	fmt.Println(current.String())
+	fmt.Println(aprilDate.String())
+
+	// aprilDate.Sub(time.Date(2000, 1, 1, 0, 0, 0, 0, time.UTC))
+
+	oneLessYears := aprilDate.AddDate(-1,0,0)
+	fmt.Println(oneLessYears.String())
+
+	tenMoreMinutes := aprilDate.Add(10 * time.Hour)
+	fmt.Println(tenMoreMinutes)
+    tenMoreMinutes := aprilDate.Add(10 * time.Minute)
+	fmt.Println(tenMoreMinutes)
+
+    exo8:
+    * afficher la date
+    * afficher l'heure
+    * Arreter l'execution pendant 2 second 
+
+    current := time.Now()
+	fmt.Println(current.String())
+	fmt.Println(current)
+
+	fmt.Println(" MM-DD-YYYY", current.Format("01-02-19")) //MM-DD-YYYY 08-27-89 ????
+	y := current.Year()
+	d := current.Day()
+	m := current.Month()
+
+	fmt.Printf("%T \n", m)             //2019
+	fmt.Println(m.String())            //August
+	fmt.Printf("%d/%d/%d \n", d, m, y) //27/8/2019
+
+	fmt.Println("hello")
+	time.Sleep(2 * time.Second) // arret l execution pendant 2 seconde
+	fmt.Println("hello")
+
+	// fmt.Println(time.Now().Unix())
+	// time.Sleep(2 * time.Second) // arret l execution pendant 2 seconde
+	// fmt.Println(time.Now().Unix())
+
+	// first := time.Date(1980, 6, 22, 7, 5, 0, 0, time.UTC)
+	// second := time.Date(2019, 8, 27, 21, 10, 0, 0, time.UTC)
+
+	// difference := second.Sub(first)
+	// fmt.Println(difference.String())
+	curr := time.Now()
+
+	fmt.Println(curr.Date())
+
+
+    exo 9:
+    Creer un tableau unique 
+    package main
+
+import (
+	"fmt"
+)
+
+func unique(x []int) []int {
+	keys := make(map[int]bool)
+
+	uniqElement := []int{}
+
+	for _, v := range x {
+		if _, val := keys[v]; !val {
+			println(uniqElement)
+			keys[v] = true
+			uniqElement = append(uniqElement, v)
+			println(uniqElement, v)
+		}
+	}
+	return uniqElement
+}
+func main() {
+
+	c := []int{1, 2, 3, 2, 3, 5, 5, 5, 6, 9, 8}
+	fmt.Println(c) //[1 2 3 2 3 5 5 5 6 9 8]
+	b := unique(c)
+	fmt.Println(b) //[1 2 3 5 6 9 8]
+}
+
+exo 10: 
+rechercher un element dans une liste de string
+
+c := []string{"Dan", "Paul", "Edouard", "Pauline", "Marc", "Samy", "Sanan", "Paul"}
+
+	for i, v := range c {
+		if v == "Paul" {
+			println(i)
+		}
+	}
+
+
+exo 11: 
+    //Rechercher un element dans une liste de string
+	c := []string{"Dan", "Paul", "Edouard", "Pauline", "Marc", "Samy", "Sanan", "Paul"}
+
+
+	// trier un tableau list
+	stringSortedList := sort.StringSlice(c)
+	stringSortedList.Sort()
+	fmt.Println(stringSortedList) //[Dan Edouard Marc Paul Paul Pauline Samy Sanan]
+
+	//search nom
+	index := stringSortedList.Search("Pauline") //[Dan Edouard Marc Paul Paul Pauline Samy Sanan]
+	fmt.Println(index)                          //5
+
+exo 12: 
+    // Recherche un ellement dans une Liste nombre 
+    	c := []int{1, 2, 3, 4, 5, 6, 7, 8, 5445, 45}
+	fmt.Println(c) //[1 2 3 4 5 6 7 8 5445 45]
+
+	// Initaliser Sort pour agir sur la list
+	sortedListInt := sort.IntSlice(c)
+
+	// recherche l index d'un element
+	index := sortedListInt.Search(3)
+	fmt.Println(index) //2
+
+	// trier une list
+	sortedListInt.Sort()
+	fmt.Println(sortedListInt) //[1 2 3 4 5 6 7 8 45 5445]
+
+	// longueur dun tableau
+	e := sortedListInt.Len()
+	fmt.Println(e) //10
+
+	// moin grand
+	v := sortedListInt.Less(8, 2)
+	fmt.Println(v)
+
+	// changer avec les index de place
+	sortedListInt.Swap(2, 5)   //Avec les indexs avant [1 2 (3) 4 5 (6) 7 8 45 5445]
+	fmt.Println(sortedListInt) // apres 			   [1 2 (6) 4 5 (3) 7 8 45 5445]
+
+	// inverser une liste
+	sort.Sort(sort.Reverse(sortedListInt)) //[1 2 (6) 4 5 (3) 7 8 45 5445]
+	fmt.Println(sortedListInt)             //[5445 45 8 7 6 5 4 3 2 1]
+
+exo13:
+
+	// Convert map to array and key and value
+	names := map[string]int{
+		"Barry": 23,
+		"Dan":   44,
+		"Stan":  22,
+		"hana":  12,
+	}
+
+	fmt.Println(names) //map[Barry:23 Dan:44 Stan:22 hana:12]
+
+	// Convert map to slice of values.
+	ageListVal := []int{}
+	for _, val := range names {
+		ageListVal = append(ageListVal, val)
+	}
+	fmt.Println(ageListVal) //[23 44 22 12]
+
+	// Convert map to slice of key.
+	namelistKey := []string{}
+	for key := range names {
+		namelistKey = append(namelistKey, key)
+	}
+	fmt.Println(namelistKey) //[Barry Dan Stan hana]
+
+	// reconverti to map avec deux listes en inversant cle et valeur
+	namesMap := map[int]string{}
+	c := len(namelistKey)
+	fmt.Println(c)
+	for i := 0; i < len(namelistKey); i++ {
+		namesMap[ageListVal[i]] = namelistKey[i]
+	}
+	fmt.Println(namesMap)//[12:hana 22:Stan 23:Barry 44:Dan]
+
+exo14:
+	// Concatener deux listes
+	list1 := []int{1, 2, 3, 4}
+	list2 := []int{5, 6, 7, 8, 9}
+
+	list1 = append(list1, list2...)
+	fmt.Println(list1)//[1 2 3 4 5 6 7 8 9]
+
+exo15:
+// Concatener deux maps
+	map1 := map[string]int{
+		"dan":    12,
+		"pierre": 13,
+		"Abdel":  33,
+	}
+
+	map2 := map[string]int{
+		"dany":      22,
+		"pierrot":   3,
+		"Abdelaziz": 53,
+	}
+
+	for key, value := range map2 {
+		map1[key] = value
+	}
+	fmt.Println(map1) //map[Abdel:33 Abdelaziz:53 dan:12 dany:22 pierre:13 pierrot:3]
+
+    exo16:
+    	// verifier qu un fichier existe
+	c := "wikigo.txt"
+	_, err := os.Stat(c)
+	if err != nil {
+		fmt.Println("File don't exist")
+	}
+
+    exo 17:
+    creer un nouveau fichier et ajoute du texte
+    	c := "wikigo.txt"
+	contentByte, err := ioutil.ReadFile(c)
+	if err != nil {
+		//affiche le contenu du file en cas d'erreur
+		contentstr := string(contentByte)
+		fmt.Println(contentstr)
+	}
+
+	strajouter := "hello guys how are you ????"
+
+	err = ioutil.WriteFile("hello_world", []byte(strajouter), 0644)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+
+
+
+    exo 17:
+    	// creer un fichier temporaire le creer l'effacer et rechercher dans une console
+	helloWorld := "Hello, World"
+
+	file, err := ioutil.TempFile("", "hello_World_tempFile")
+	if err != nil {
+		panic(err)
+	}
+
+	// effacer a la finle temp file
+	defer os.Remove(file.Name())
+
+	_, err = file.Write([]byte(helloWorld))
+	if err != nil {
+		panic(err)
+	}
+
+	// afficher la localisation du fichier
+	fmt.Println(file.Name())
+
+	// Commande sur le terminal pour retrouver le fichier
+	// less /var/folders/mn/29kvrjfd39j26yq1cb2hn0780000gn/T/hello_World_tempFile564995219
+
+exo 18:
+	// Compter le nombre de ligne dans un fichier txt
+	file, err := os.Open("wikigo.txt")
+	if err != nil {
+		panic(err)
+	}
+	fileScanner := bufio.NewScanner(file)
+	lineCount := 0
+	for fileScanner.Scan() {
+		lineCount++
+	}
+	defer file.Close()
+	fmt.Println(lineCount) //27
+
+
+exo 19:
+// Retour un line dans le fichier
+func readline(lineNumber int) string {
+	file, err := os.Open("wikigo.txt")
+	if err != nil {
+		panic(err)
+	}
+	fileScanner := bufio.NewScanner(file)
+	lineCount := 0
+	for fileScanner.Scan() {
+		if lineCount == lineNumber {
+			return fileScanner.Text()
+		}
+		lineCount++
+	}
+	defer file.Close()
+	return ""
+}
+
+func main() {
+	//
+	fmt.Println(readline(3))
+}
+
+exo 20:
+// commparer deux fichiers le meme texte
+	one, err := ioutil.ReadFile("onef.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	two, err := ioutil.ReadFile("twof.txt")
+	if err != nil {
+		panic(err)
+	}
+
+	same := bytes.Equal(one, two)
+
+	fmt.Println(same)
+
+
+exo21:
+	//Creer un fichier puis l'effacer
+	err := os.Remove("delete.txt")
+	if err != nil {
+		panic(err)
+	}
+
+exo22:
+	// Creer  une copie d'un fichier
+	original, err := os.Open("textAcopier.txt")
+	if err != nil {
+		panic(err)
+	}
+	defer original.Close()
+
+	copyFichier, err2 := os.Create("textAcopierCopier.txt")
+	if err != nil {
+		panic(err2)
+	}
+	defer copyFichier.Close()
+	_, err3 := io.Copy(copyFichier, original)
+
+	if err3 != nil{
+		panic(err3)
+	}
+
+	original.Close()
+	os.Remove("original.txt")
+
+exo23:
+// Modifier le nom du fichier 
+	err := os.Rename("textAcopierCopier.txt", "textCopyFile.txt")
+	if err != nil {
+		panic(err)
+	}
+
+exo24:
+	// Supprimer un dossier 
+	err := os.Remove("testDirectory")
+	if err != nil {
+		panic(err)
+	}
+
+exo25:
+
+	file, err := ioutil.ReadDir("testdirectory")
+	if err != nil {
+		panic(err)
+	}
+
+	for _, vf := range file {
+		fmt.Println(vf.Name())
+		// fichier1
+		// fichier2
+		// fichier3
+		// fichier4
+
+		// fmt.Println(vf.Size()) //permet de savoir si le fichier contient des donner
+		// 4
+		// 0
+		// 0
+		// 0
+
+		//fmt.Println(vf.Mode())
+		// -rw-r--r--
+		// -rw-r--r--
+		// -rw-r--r--
+		// -rw-r--r--
+
+		// fmt.Println(vf.ModTime())
+		// 2019-08-28 22:23:32.4791999 +0200 CEST
+		// 2019-08-28 21:44:07.568 +0200 CEST
+		// 2019-08-28 21:43:55.224 +0200 CEST
+		// 2019-08-28 21:43:42.933 +0200 CEST
+
+		// fmt.Println(vf.IsDir())
+		// false
+		// false
+		// false
+		// false
+
+
+	}
